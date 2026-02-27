@@ -409,7 +409,69 @@ public class StreamBasic {
     | (\ (   | (      | |   ) || |   | || |      | (
     | ) \ \__| (____/\| (__/  )| (___) || (____/\| (____/\
     |/   \__/(_______/(______/ (_______)(_______/(_______/
+
+    reduce es una operación terminal de Stream que combina todos
+    los elementos del flujo en un solo resultado aplicando
+    una función acumuladora.
+
+    Example 1 : reduce((a, b) -> a + b);
+    aquí el acumulado es el mismo a y b es el siguiente elemento
+    y devuelve un Optional porque puede estar vacío
+
+    Example 2 : reduce(0, (a, b) -> a + b);
+    aquí se utiliza un acumulador explícito (primera entrada)
+    y devuelve el tipo del acumulador (int)
+
      */
+
+    // Sumer todos los números
+    public int sumAll(List<Integer> numbers) {
+        return numbers.stream()
+                // .reduce(0, (a, b) -> a + b) es la misma cosa :)
+                .reduce(0, Integer::sum);
+    }
+
+    // Multiplicar todos los números
+    public int multiplyAll(List<Integer> numbers) {
+        return numbers.stream() // Aquí se muestra que el primer a
+                                // es el acumulador ( 1*b = n > 0 )
+                .reduce(1, (a, b) -> a * b);
+    }
+
+    // Obtener el número más grande usando reduce
+    public Optional<Integer> maxUsingReduce(List<Integer> numbers) {
+        return numbers.stream()
+                // .reduce(Integer::max)
+                .reduce((a, b) -> a > b ? a : b);
+    }
+
+    // Obtener el número más pequeño usando reduce
+    public Optional<Integer> minUsingReduce(List<Integer> numbers) {
+        return numbers.stream()
+                .reduce((a, b) -> a < b ? a : b);
+    }
+
+    // Sumar solo los números pares
+    public int sumEven(List<Integer> numbers) {
+        return numbers.stream() // Normalmente primero se filtran los Even Numbers
+                                // Pero la idea es usar solo reduce
+                .reduce(0, (a, b) -> b % 2 == 0 ? a + b : a);
+    }
+
+    // Restar todos los números en orden
+    public Optional<Integer> subtractAll(List<Integer> numbers) {
+        return numbers.stream()
+                .reduce((a, b) -> a - b);
+    }
+
+    // Calcular la suma acumulada empezando en 100
+    public int sumStartingAtHundred(List<Integer> numbers) {
+        return numbers.stream()
+                // .reduce(100, (a, b) -> a + b)
+                .reduce(100, Integer::sum);
+    }
+
+
 
 
     public static void main(String[] args) {
@@ -423,7 +485,7 @@ public class StreamBasic {
         );
         System.out.println(
 
-                sb.countDistinct(numbers)
+                sb.sumAll(numbers)
 
         );
     }
