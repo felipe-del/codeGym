@@ -1,7 +1,9 @@
 package org.streams.exercises;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class StreamBasic {
     /*
@@ -26,60 +28,70 @@ public class StreamBasic {
                 .filter(n -> n % 2 == 0)
                 .toList();
     }
+
     // Retornar solo números impares
     public List<Integer> getOddNumbers(List<Integer> numbers) {
         return numbers.stream()
                 .filter(n -> n % 2 != 0)
                 .toList();
     }
+
     //Retorna números mayores a 10
     public List<Integer> getGreaterThanTen(List<Integer> numbers) {
         return numbers.stream()
                 .filter(n -> n > 10)
                 .toList();
     }
+
     // Retornar números menores o iguales a 0
     public List<Integer> getLessOrEqualZero(List<Integer> numbers) {
         return numbers.stream()
                 .filter(n -> n <= 0)
                 .toList();
     }
+
     // Retornar números divisibles entre 3
     public List<Integer> getDivisibleByThree(List<Integer> numbers) {
         return numbers.stream()
                 .filter(n -> n % 3 == 0)
                 .toList();
     }
+
     // Retorna número múltiplo de 5 pero no de 10
     public List<Integer> getMultiplesOfFiveNotTen(List<Integer> numbers) {
         return numbers.stream()
                 .filter(n -> n % 5 == 0 && n % 10 != 0)
                 .toList();
     }
+
     // Retornar números entre 20 y 50 (inclusive)
     public List<Integer> getBetweenTwentyAndFifty(List<Integer> numbers) {
         return numbers.stream()
                 .filter(n -> n >= 20 && n <= 50)
                 .toList();
     }
+
     //Retornar números negativos
     public List<Integer> getNegativeNumbers(List<Integer> numbers) {
         return numbers.stream()
                 .filter(n -> n < 0)
                 .toList();
     }
+
     //Retornar números positivos
     public List<Integer> getPositiveNumbers(List<Integer> numbers) {
         return numbers.stream()
                 .filter(n -> n > 0)
                 .toList();
     }
+
     // Retornar números que terminen en 7
     public List<Integer> getEndingInSeven(List<Integer> numbers) {
         return numbers.stream()
                 .filter(n -> Math.abs(n) % 10 == 7)
                 .toList();
     }
+
     /*
      _______  _______  _______
     (       )(  ___  )(  ____ )
@@ -89,7 +101,68 @@ public class StreamBasic {
     | |   | || (   ) || (
     | )   ( || )   ( || )
     |/     \||/     \||/
+
+    Map es una operación intermedia de Stream que transforma cada
+    elemento en otro valor aplicando una función, manteniendo la
+    misma cantidad de elementos en el flujo.
+
      */
+
+    // Multiplicar cada número por 2
+    public List<Integer> doubleNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(n -> n * 2)
+                .toList();
+    }
+
+    // Elevar cada número al cuadrado
+    public List<Integer> squareNumbers(List<Integer> numbs) {
+        return numbs.stream()
+                .map(n -> n * n)
+                .toList();
+    }
+
+    // Convertir cada número en su valor absoluto
+    public List<Integer> absoluteValues(List<Integer> numbers) {
+        return numbers.stream()
+                .map(n -> n < 0 ? -n : n)
+                .toList();
+    }
+
+    // Convertir cada número en su string equivalente
+    public List<String> convertToString(List<Integer> numbers) {
+        return numbers.stream()
+                .map(String::valueOf)
+                .toList();
+    }
+
+    // Sumar 10 a cada número
+    public List<Integer> addTenToEach(List<Integer> numbers) {
+        return numbers.stream()
+                .map(n -> n + 10)
+                .toList();
+    }
+
+    // Convertir números a boolean (true si es par, false si es impar)
+    public List<Boolean> mapToEvenBoolean(List<Integer> numbers) {
+        return numbers.stream()
+                .map(n -> n % 2 == 0)
+                .toList();
+    }
+
+    // Obtener el residuo de cada número dividido entre 3
+    public List<Integer> getRemainderByThree(List<Integer> numbers) {
+        return numbers.stream()
+                .map(n -> n % 3)
+                .toList();
+    }
+
+    // Negar cada número
+    public List<Integer> negateNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(n -> -n)
+                .toList();
+    }
 
     /*
      _______  _______  _______ _________            ______  _________ _______ __________________ _        _______ _________            _       _________ _______ __________________            _______  _       _________ _______
@@ -100,7 +173,93 @@ public class StreamBasic {
           ) || |   | || (\ (      | |      / /     | |   ) |   | |         ) |   | |      | |   | | \   || |         | |      / /     | |         | |   | |   | |   | |      | |      / /           ) ||  ( \ \    | |   | (
     /\____) || (___) || ) \ \__   | |     / /      | (__/  )___) (___/\____) |   | |   ___) (___| )  \  || (____/\   | |     / /      | (____/\___) (___| )   ( |___) (___   | |     / /      /\____) ||  /  \ \___) (___| )
     \_______)(_______)|/   \__/   )_(     \/       (______/ \_______/\_______)   )_(   \_______/|/    )_)(_______/   )_(     \/       (_______/\_______/|/     \|\_______/   )_(     \/       \_______)|_/    \/\_______/|/
+
+     Sort/sorted ordena los elementos del stream de forma ascendente o
+     según un comparador
+     Distinct elimina duplicados, dejando solo elementos únicos
+     Limit(n) toma dolo los primeros n elementos del Stream
+     Skip(n) Omite los primeros n elementos del stream y procesa el reste
+
      */
+
+    // Ordenar números ascendentemente
+    public List<Integer> sortAscending(List<Integer> numbers) {
+        return numbers.stream()
+                .sorted() // Por defecto usa Comparator.naturalOrder()
+                .toList();
+    }
+
+    // Ordenar números descendientemente
+    public List<Integer> sortDescending(List<Integer> numbers) {
+        return numbers.stream()
+                .sorted(Comparator.reverseOrder())
+                .toList();
+    }
+
+    // Eliminar duplicados
+    public List<Integer> removeDuplicates(List<Integer> numbers) {
+        return numbers.stream()
+                .distinct()
+                .toList();
+    }
+
+    // Obtener los 5 números más grandes
+    public List<Integer> getTopFive(List<Integer> numbers) {
+        return numbers.stream()
+                .sorted(Comparator.reverseOrder())
+                .limit(5)
+                .toList();
+    }
+
+    // Obtener los 5 números más pequeños
+    public List<Integer> getBottomFive(List<Integer> numbers) {
+        return numbers.stream()
+                .sorted()
+                .limit(5)
+                .toList();
+    }
+
+    // Saltar los primeros 3 números
+    public List<Integer> skipFirstThree(List<Integer> numbers) {
+        return numbers.stream()
+                .skip(3)
+                .toList();
+    }
+
+    // Obtener los primeros 4 números pares
+    public List<Integer> getFirstFourEven(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .limit(4)
+                .toList();
+    }
+
+    // Ordenar y luego eliminar duplicados
+    public List<Integer> sortAndDistinct(List<Integer> numbers) {
+        return numbers.stream()
+                .sorted()
+                .distinct()
+                .toList();
+    }
+
+    // Obtener el segundo número más grande
+    public Optional<Integer> getSecondLargest(List<Integer> numbers) {
+        return numbers.stream()
+                .distinct()
+                .sorted(Comparator.reverseOrder())
+                .skip(1)
+                .findFirst();
+    }
+
+    // Obtener el tercer número más pequeño
+    public Optional<Integer> getThirdSmallest(List<Integer> numbers) {
+        return numbers.stream()
+                .distinct()
+                .sorted()
+                .skip(2)
+                .findFirst();
+    }
+
     /*
      _______  _______ _________ _______             _______  _______  _______  _______  _______ __________________ _______  _        _______
     (       )(  ___  )\__   __/(  ____ \|\     /|  (  ___  )(  ____ )(  ____ \(  ____ )(  ___  )\__   __/\__   __/(  ___  )( (    /|(  ____ \
@@ -152,6 +311,6 @@ public class StreamBasic {
                 50, 75, 99, 100, 101, 150,
                 2, 3, 7, 14, 20, 17, 32, 87
         );
-        System.out.println(sb.getEndingInSeven(numbers));
+        System.out.println(sb.getThirdSmallest(numbers));
     }
 }
