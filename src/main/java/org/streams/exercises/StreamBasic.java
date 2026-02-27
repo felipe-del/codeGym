@@ -517,6 +517,90 @@ public class StreamBasic {
 
     }
 
+    // Sumar los cuadrados de los números positivos mayores a 10
+    public Optional<Integer> sumSquaresPositiveGreaterThanTen(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n > 10)
+                .map(n -> n * n)
+                .reduce(Integer::sum);
+    }
+
+    // Obtener los 3 números negativos con mayor valor absoluto
+    public List<Integer> topThreeNegativeByAbs(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n < 0)
+                .sorted()
+                .limit(3)
+                .toList();
+    }
+
+    // Verifica si todos los números pares son menores que 50
+    public boolean areAllEvenLessThanFifty(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .allMatch(n -> n < 50);
+    }
+
+    // Obtener el producto de todos los números impares mayores que 5
+    public Optional<Integer> productOddGreaterThanFive(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n > 5 && n % 2 != 0)
+                .reduce((a, b) -> a * b);
+    }
+
+    // Retornar los 5 números positivos más pequeños después de sumarles 10
+    public List<Integer> fiveSmallestPositivePlusTen(List<Integer> numbers) {
+        return numbers.stream()
+                .map(n -> n + 10)
+                .filter(n -> n > 0)
+                .sorted()
+                .limit(5)
+                .toList();
+    }
+
+    // Verificar si existe algún número que sea múltiplo de 3 y de 5 a la vez
+    public boolean hasMultipleOfThreeAndFive(List<Integer> numbers) {
+        return numbers.stream()
+                .anyMatch(n -> n % 3 == 0 && n % 5 == 0);
+    }
+
+    // Obtener el segundo número con mayor valor absoluto
+    public Optional<Integer> secondLargestByAbs(List<Integer> numbers) {
+        return numbers.stream()
+                .map(n -> Math.abs(n))
+                .sorted(Comparator.reverseOrder())
+                .skip(1)
+                .findFirst();
+    }
+
+    // Contar cuántos números positivos termina en 7
+    public Long countPositiveEndingInSeven(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n > 0 && n % 10 == 7)
+                .count();
+    }
+
+    // Retornar la lista de números negativos elevados al cuadrado,
+    // ordenados ascendentemente
+    public List<Integer> sortedSquaresOfNegatives(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n < 0)
+                .map(n -> n * n)
+                .sorted()
+                .toList();
+    }
+
+    // Sumar todos los números después de convertir los negativos a positivos
+    // y los positivos a negativos
+    public int sumNegateAll(List<Integer> numbers) {
+        return numbers.stream()
+                .map(n -> -n)
+                .reduce(0, Integer::sum);
+    }
+
+
+
+
     public static void main(String[] args) {
         StreamBasic sb = new StreamBasic();
         List<Integer> numbers = Arrays.asList(
@@ -528,7 +612,7 @@ public class StreamBasic {
         );
         System.out.println(
 
-                sb.sumOfSquaresOfEven(numbers)
+                sb.sumNegateAll(numbers)
 
         );
     }
