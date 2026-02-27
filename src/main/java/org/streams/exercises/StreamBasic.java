@@ -434,7 +434,7 @@ public class StreamBasic {
     // Multiplicar todos los números
     public int multiplyAll(List<Integer> numbers) {
         return numbers.stream() // Aquí se muestra que el primer a
-                                // es el acumulador ( 1*b = n > 0 )
+                // es el acumulador ( 1*b = n > 0 )
                 .reduce(1, (a, b) -> a * b);
     }
 
@@ -454,7 +454,7 @@ public class StreamBasic {
     // Sumar solo los números pares
     public int sumEven(List<Integer> numbers) {
         return numbers.stream() // Normalmente primero se filtran los Even Numbers
-                                // Pero la idea es usar solo reduce
+                // Pero la idea es usar solo reduce
                 .reduce(0, (a, b) -> b % 2 == 0 ? a + b : a);
     }
 
@@ -484,14 +484,38 @@ public class StreamBasic {
      */
 
     // Encontrar el número más cercano a cero
+    public Optional<Integer> closetToZero(List<Integer> numbers) {
+        return numbers.stream() // Intento trabajar con positivos
+                // asi buscaría el positivo más pequeño
+                // que no sea cero
+                .filter(n -> n != 0)
+                .reduce((a, b)
+                        -> Math.abs(a) < Math.abs(b) ? a : b);
+    }
 
     // Encontrar el número con mayor valor absoluto
+    public Optional<Integer> maxAbsoluteValue(List<Integer> numbers) {
+        return numbers.stream()
+                .reduce((a, b)
+                        -> Math.abs(a) > Math.abs(b) ? a : b);
+    }
 
     // Retornar los números ordenados por su valor absoluto
+    public List<Integer> sortByAbsoluteValue(List<Integer> numbers) {
+        return numbers.stream()
+                .map(Math::abs)
+                .sorted()
+                .toList();
+    }
 
     // Obtener la suma de los cuadrados de los números pares
+    public Optional<Integer> sumOfSquaresOfEven(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .map(n -> n * n)
+                .reduce(Integer::sum);
 
-    // Verificar si la lista forma una secuencia consecutiva
+    }
 
     public static void main(String[] args) {
         StreamBasic sb = new StreamBasic();
@@ -504,7 +528,7 @@ public class StreamBasic {
         );
         System.out.println(
 
-                sb.sumAll(numbers)
+                sb.sumOfSquaresOfEven(numbers)
 
         );
     }
