@@ -321,7 +321,44 @@ public class StreamBasic {
     | (         | |   | | \   || |   ) |
     | )      ___) (___| )  \  || (__/  )
     |/       \_______/|/    )_)(______/
+
+    find es una operación terminal de Stream que devuelve un
+    Optional con el primer elemento que cumple una condición o
+    que aparece en el flujo.
+
      */
+
+    // Obtener el primer número par
+    public Optional<Integer> findFirstEven(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .findFirst();
+    }
+
+    // Obtener el primer número mayor a 50
+    public Optional<Integer> findFirstGreaterThanFifty(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n > 50)
+                .findFirst();
+    }
+
+    // Obtener cualquier número negativo
+    public Optional<Integer> findAnyNegative(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n < 0)
+                .findAny();
+    }
+
+    // Obtener el primer número divisible entre 7
+    public Optional<Integer> findFirstDivisibleBySeven(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n % 7 == 0)
+                .findFirst();
+    }
+
+
+
+
     /*
      _______  _______           _       _________
     (  ____ \(  ___  )|\     /|( (    /|\__   __/
@@ -353,6 +390,6 @@ public class StreamBasic {
                 50, 75, 99, 100, 101, 150,
                 2, 3, 7, 14, 20, 17, 32, 87
         );
-        System.out.println(sb.noneNegative(numbers));
+        sb.findFirstDivisibleBySeven(numbers).ifPresent(System.out::println);
     }
 }
