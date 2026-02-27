@@ -356,9 +356,6 @@ public class StreamBasic {
                 .findFirst();
     }
 
-
-
-
     /*
      _______  _______           _       _________
     (  ____ \(  ___  )|\     /|( (    /|\__   __/
@@ -368,7 +365,41 @@ public class StreamBasic {
     | |      | |   | || |   | || | \   |   | |
     | (____/\| (___) || (___) || )  \  |   | |
     (_______/(_______)(_______)|/    )_)   )_(
+
+    count es una operación terminal de Stream que devuelve la
+    cantidad de elementos que hay en el flujo como un long.
+
      */
+
+    // Contar cuántos números son pares
+    public long countEven(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .count();
+    }
+
+    // Contar cúantos son mayores a 10
+    public long countGreaterThanTen(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n > 10)
+                .count();
+    }
+
+    // Contar cuántos son negativos
+    public long countNegative(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n < 0)
+                .count();
+    }
+
+    // Contar cuántos son únicos
+    public long countDistinct(List<Integer> numbers) {
+        return numbers.stream()
+                .distinct()
+                .count();
+    }
+
+
     /*
      _______  _______  ______            _______  _______
     (  ____ )(  ____ \(  __  \ |\     /|(  ____ \(  ____ \
@@ -390,6 +421,10 @@ public class StreamBasic {
                 50, 75, 99, 100, 101, 150,
                 2, 3, 7, 14, 20, 17, 32, 87
         );
-        sb.findFirstDivisibleBySeven(numbers).ifPresent(System.out::println);
+        System.out.println(
+
+                sb.countDistinct(numbers)
+
+        );
     }
 }
