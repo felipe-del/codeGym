@@ -471,8 +471,27 @@ public class StreamBasic {
                 .reduce(100, Integer::sum);
     }
 
+    /*
+     ______   _______  _                 _______
+    (  ___ \ (  ___  )( (    /||\     /|(  ____ \
+    | (   ) )| (   ) ||  \  ( || )   ( || (    \/
+    | (__/ / | |   | ||   \ | || |   | || (_____
+    |  __ (  | |   | || (\ \) || |   | |(_____  )
+    | (  \ \ | |   | || | \   || |   | |      ) |
+    | )___) )| (___) || )  \  || (___) |/\____) |
+    |/ \___/ (_______)|/    )_)(_______)\_______)
 
+     */
 
+    // Encontrar el número más cercano a cero
+
+    // Encontrar el número con mayor valor absoluto
+
+    // Retornar los números ordenados por su valor absoluto
+
+    // Obtener la suma de los cuadrados de los números pares
+
+    // Verificar si la lista forma una secuencia consecutiva
 
     public static void main(String[] args) {
         StreamBasic sb = new StreamBasic();
