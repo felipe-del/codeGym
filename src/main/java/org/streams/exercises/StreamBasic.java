@@ -269,7 +269,49 @@ public class StreamBasic {
     | |   | || (   ) |   | |   | |      | (   ) |  | |   | || (      | (      | (\ (   | (   ) |   | |      | |   | |   | || | \   |      ) |
     | )   ( || )   ( |   | |   | (____/\| )   ( |  | (___) || )      | (____/\| ) \ \__| )   ( |   | |   ___) (___| (___) || )  \  |/\____) |
     |/     \||/     \|   )_(   (_______/|/     \|  (_______)|/       (_______/|/   \__/|/     \|   )_(   \_______/(_______)|/    )_)\_______)
+
+     allMatch es una operación terminal de Stream que devuelve
+     true si todos los elementos cumplen una condición dada.
+
      */
+
+    // Verifica si todos los números son positivos
+    public boolean areAllPositive(List<Integer> numbers) {
+        return numbers.stream()
+                .allMatch(n -> n > 0);
+    }
+
+    // Verifica si todos son pares
+    public boolean areAllEven(List<Integer> numbers) {
+        return numbers.stream()
+                .allMatch(n -> n % 2 == 0);
+    }
+
+    // Verifica si existe al menos un número negativo
+    public boolean hasAnyNegative(List<Integer> numbers) {
+        return numbers.stream()
+                .anyMatch(n -> n < 0);
+    }
+
+    // Verifica si existe al menos un número mayor a 100
+    public boolean hasAnyGreaterThanHundred(List<Integer> numbers) {
+        return numbers.stream()
+                .anyMatch(n -> n > 100);
+    }
+
+    // Verifica que ninguno sea cero
+    public boolean noneZero(List<Integer> numbers) {
+        return numbers.stream()
+                .noneMatch(n -> n == 0);
+    }
+
+    // Verifica que ninguno sea negativo
+    public boolean noneNegative(List<Integer> numbers) {
+        return numbers.stream()
+                .noneMatch(n -> n < 0);
+    }
+
+
     /*
      _______ _________ _        ______
     (  ____ \\__   __/( (    /|(  __  \
@@ -311,6 +353,6 @@ public class StreamBasic {
                 50, 75, 99, 100, 101, 150,
                 2, 3, 7, 14, 20, 17, 32, 87
         );
-        System.out.println(sb.getThirdSmallest(numbers));
+        System.out.println(sb.noneNegative(numbers));
     }
 }
