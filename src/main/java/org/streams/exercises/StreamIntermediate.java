@@ -98,7 +98,107 @@ public class StreamIntermediate {
                 .collect(Collectors.toList());
     }
 
+    /*
 
+     _______  _______  _______           _______ _________ _        _______      __      _______  _______  _______ ____________________________________ _______  _       _________ _        _______
+    (  ____ \(  ____ )(  ___  )|\     /|(  ____ )\__   __/( (    /|(  ____ \    /__\    (  ____ )(  ___  )(  ____ )\__   __/\__   __/\__   __/\__   __/(  ___  )( (    /|\__   __/( (    /|(  ____ \
+    | (    \/| (    )|| (   ) || )   ( || (    )|   ) (   |  \  ( || (    \/   ( \/ )   | (    )|| (   ) || (    )|   ) (      ) (      ) (      ) (   | (   ) ||  \  ( |   ) (   |  \  ( || (    \/
+    | |      | (____)|| |   | || |   | || (____)|   | |   |   \ | || |          \  /    | (____)|| (___) || (____)|   | |      | |      | |      | |   | |   | ||   \ | |   | |   |   \ | || |
+    | | ____ |     __)| |   | || |   | ||  _____)   | |   | (\ \) || | ____     /  \/\  |  _____)|  ___  ||     __)   | |      | |      | |      | |   | |   | || (\ \) |   | |   | (\ \) || | ____
+    | | \_  )| (\ (   | |   | || |   | || (         | |   | | \   || | \_  )   / /\  /  | (      | (   ) || (\ (      | |      | |      | |      | |   | |   | || | \   |   | |   | | \   || | \_  )
+    | (___) || ) \ \__| (___) || (___) || )      ___) (___| )  \  || (___) |  (  \/  \  | )      | )   ( || ) \ \__   | |   ___) (___   | |   ___) (___| (___) || )  \  |___) (___| )  \  || (___) |
+    (_______)|/   \__/(_______)(_______)|/       \_______/|/    )_)(_______)   \___/\/  |/       |/     \||/   \__/   )_(   \_______/   )_(   \_______/(_______)|/    )_)\_______/|/    )_)(_______)
+
+    Grouping agrupa los elementos de un stream en un Map según una
+    función que define la clave del grupo.
+
+    Partitioning divide los elementos de un stream en dos
+    grupos (true y false) según una condición.
+
+     */
+
+    // Agrupar los números por signo (positivo/negativo/0)
+    public Map<String, List<Integer>> groupBySign(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.groupingBy(n -> {
+                    if (n > 0) return "POSITIVE";
+                    if (n < 0) return "NEGATIVE";
+                    return "ZERO";
+                }));
+    }
+
+    // Agrupar los números por paridad
+    public Map<String, List<Integer>> groupByParity(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.groupingBy(n ->
+                        n % 2 == 0 ? "Pares" : "Impares"
+                ));
+    }
+
+    // Agrupar los números por rango: <10, 10-50,>50
+    public Map<String, List<Integer>> groupByRange(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.groupingBy(n -> {
+                    if (n < 10) return "Menos de 10";
+                    if (n >= 10 && n <= 50) return "Entre 10 y 50";
+                    return "Mayor de 50";
+                }));
+    }
+
+    // Contar cúantos números hay por signo
+    public Map<String, Long> countBySign(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.groupingBy(n -> {
+                    if (n < 0) return "Negativos";
+                    if (n > 0) return "Positivos";
+                    return "Ceros";
+                }, Collectors.counting()));
+    }
+
+    // Contar cúantos números hay por paridad
+    public Map<String, Long> countByParity(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.groupingBy(n ->
+                        n % 2 == 0 ? "Pares" : "Impares", Collectors.counting()
+                        ));
+    }
+
+    // Particionar números positivos y no positivos
+    public Map<Boolean, List<Integer>> partitionPositive(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.partitioningBy(n -> n > 0));
+    }
+
+    // Particionar números mayores que 20 y menores o iguales
+    public Map<Boolean, List<Integer>> partitionGreaterThan20(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.partitioningBy(n -> n > 20));
+    }
+
+    // Agrugar números por residuo módulo 3
+    public Map<Integer, List<Integer>> groupByModulo3(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.groupingBy(n -> n % 3));
+    }
+
+    // Obtener máximo número por grupo de signo
+    public Map<String, Optional<Integer>> maxBySign(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.groupingBy(n -> {
+                    if (n > 0) return "Positivo mayor";
+                    if (n < 0) return "Negativo mayor";
+                    return "Cero";
+                }, Collectors.maxBy(Comparator.naturalOrder())));
+    }
+
+    // Obtener mínimo número por grupo de paridad
+    public Map<String, Optional<Integer>> minByParity(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.groupingBy(n -> {
+                    if (n % 2 == 0) return "Par mínimo";
+                    return "Impar mínimo";
+                }, Collectors.minBy(Comparator.naturalOrder())));
+    }
 
 
     public static void main(String[] args) {
@@ -115,7 +215,6 @@ public class StreamIntermediate {
                 Arrays.asList(-10, -20)
         );
 
-        System.out.println(si.collectEvenNumber(list));
-
+        System.out.println(si.groupByModulo3(list));
     }
 }
