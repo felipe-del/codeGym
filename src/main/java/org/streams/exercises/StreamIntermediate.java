@@ -200,6 +200,89 @@ public class StreamIntermediate {
                 }, Collectors.minBy(Comparator.naturalOrder())));
     }
 
+    /*
+     _______  _        _______ _________ _______  _______  _______             _        _______  _______ _________ _______  ______
+    (  ____ \( \      (  ___  )\__   __/(       )(  ___  )(  ____ )       /\  ( (    /|(  ____ \(  ____ \\__   __/(  ____ \(  __  \
+    | (    \/| (      | (   ) |   ) (   | () () || (   ) || (    )|      / /  |  \  ( || (    \/| (    \/   ) (   | (    \/| (  \  )
+    | (__    | |      | (___) |   | |   | || || || (___) || (____)|     / /   |   \ | || (__    | (_____    | |   | (__    | |   ) |
+    |  __)   | |      |  ___  |   | |   | |(_)| ||  ___  ||  _____)    / /    | (\ \) ||  __)   (_____  )   | |   |  __)   | |   | |
+    | (      | |      | (   ) |   | |   | |   | || (   ) || (         / /     | | \   || (            ) |   | |   | (      | |   ) |
+    | )      | (____/\| )   ( |   | |   | )   ( || )   ( || )        / /      | )  \  || (____/\/\____) |   | |   | (____/\| (__/  )
+    |/       (_______/|/     \|   )_(   |/     \||/     \||/         \/       |/    )_)(_______/\_______)   )_(   (_______/(______/
+
+    FlatMap es una operación que transforma cada elemento en otro stream y luego aplana todos
+    los resultados en un único stream continuo
+
+    Nested Structures son estructuras de datos que contienen otras estructuras dentro (por ejemplo
+    List<List<T>> formando niveles o jerarquías internas
+
+     */
+
+    // Aplanar una lista de listas de números
+    public List<Integer> flattenListOfLists(List<List<Integer>> listOfLists) {
+        return listOfLists.stream()
+                // .flatMap(list -> list.stream())
+                .flatMap(List::stream)
+                .toList();
+    }
+
+    // Obtener todos los números pares de una lista de listas
+    public List<Integer> flattenEvenNumbers(List<List<Integer>> listOfLists) {
+        return listOfLists.stream()
+                .flatMap(List::stream)
+                .filter(n -> n % 2 == 0)
+                .toList();
+    }
+
+    // Obtener el producto de todos los números en lista de listas
+    public Optional<Integer> flattenProductAll(List<List<Integer>> listOfLists) {
+        return listOfLists.stream()
+                .flatMap(List::stream)
+                .reduce(Math::multiplyExact);
+    }
+
+    // Aplanar y eliminar duplicados
+    public List<Integer> flattenAndDistinct(List<List<Integer>> listOfLists) {
+        return listOfLists.stream()
+                .flatMap(List::stream)
+                .distinct()
+                .toList();
+    }
+
+    // Aplanar y ordenar todos los números
+    public List<Integer> flattenAndSort(List<List<Integer>> listOfLists) {
+        return listOfLists.stream()
+                .flatMap(List::stream)
+                .sorted()
+                .toList();
+    }
+
+    // Obtener el número más cercano a cero de lista de listas
+    public Optional<Integer> flattenClosetToZero(List<List<Integer>> listOfLists) {
+        return listOfLists.stream()
+                .flatMap(List::stream)
+                .reduce((a, b) -> Math.abs(a) < Math.abs(b) ? a : b);
+    }
+
+    // Obtener la suma de cuadrados de positivos de lista de listas
+    public Integer flattenSumSquaresPositive(List<List<Integer>> listOfLists) {
+        return listOfLists.stream()
+                .flatMap(List::stream)
+                .filter(n -> n > 0)
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
+    // Obtener el número máximo de cada sublista
+    public List<Integer> maxPerSublist(List<List<Integer>> listOfLists) {
+        return listOfLists.stream()
+                .map(sublist -> sublist.stream()
+                        .max(Integer::compareTo)
+                        .orElse(null))
+                .toList();
+    }
+
+
 
     public static void main(String[] args) {
         System.out.println("Ahora le subimos el nivel a los streams :)");
@@ -211,10 +294,10 @@ public class StreamIntermediate {
 
         List<List<Integer>> listOfLists = Arrays.asList(
                 Arrays.asList(1, 2, 3),
-                Arrays.asList(4, 5, 6),
+                Arrays.asList(4, 5, 6, 1),
                 Arrays.asList(-10, -20)
         );
 
-        System.out.println(si.groupByModulo3(list));
+        System.out.println(si.maxPerSublist(listOfLists));
     }
 }
