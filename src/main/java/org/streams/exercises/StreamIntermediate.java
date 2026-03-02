@@ -282,6 +282,26 @@ public class StreamIntermediate {
                 .toList();
     }
 
+    // Obtener el número mínimo de cada sublista
+    public Map<Integer, Optional<Integer>> minPerSublist(List<List<Integer>> listOfLists) {
+        return IntStream.range(0, listOfLists.size())
+                .boxed()
+                .collect(Collectors.toMap(
+                        i -> i,
+                        i -> listOfLists.get(i).stream()
+                                .min(Integer::compareTo)
+                ));
+    }
+
+    // Contar cúantos números impares hay en total
+    public long countOddFlattened(List<List<Integer>> listOfLists) {
+        return listOfLists.stream()
+                .flatMap(List::stream)
+                .filter(n -> n % 2 != 0)
+                .count();
+    }
+
+
 
 
     public static void main(String[] args) {
@@ -298,6 +318,6 @@ public class StreamIntermediate {
                 Arrays.asList(-10, -20)
         );
 
-        System.out.println(si.maxPerSublist(listOfLists));
+        System.out.println(si.countOddFlattened(listOfLists));
     }
 }
