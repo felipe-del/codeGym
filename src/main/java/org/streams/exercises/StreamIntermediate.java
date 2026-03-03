@@ -315,7 +315,7 @@ public class StreamIntermediate {
      (count, sum, min, max y average) de una conjunto de valores int en una sola
      operación.
 
-     Se usa normalmente con IntStream.summaryStatisctics() o Collectors.summarizingInt()
+     Se usa normalmente con IntStream.summaryStatistics() o Collectors.summarizingInt()
      para obtener todas esas métricas de forma eficiente sin recorrer la
      colección varias veces.
 
@@ -329,13 +329,51 @@ public class StreamIntermediate {
     }
 
     // Obtener promedio de números positivos
-    public OptionalDouble averagePositive(List<Integer> numbers) {
+    public double averagePositive(List<Integer> numbers) {
         return numbers.stream()
                 .mapToInt(Integer::intValue)
                 .filter(n -> n > 0)
-                .average();
+                .summaryStatistics()
+                .getAverage();
     }
 
+    // Obtener suma de números negativos
+    public long sumNegative(List<Integer> numbers) {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .filter(n -> n < 0)
+                .summaryStatistics()
+                .getSum();
+    }
+
+    // Obtener número máximo absoluto
+    public float maxAbsoluteValueStats(List<Integer> numbers) {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                //.map(n -> Math.abs(n))
+                .map(Math::abs)
+                .summaryStatistics()
+                .getMax();
+    }
+
+    // Obtener número mínimo absoluto
+    public float minAbsoluteValueStats(List<Integer> numbers) {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .map(Math::abs)
+                .summaryStatistics()
+                .getMin();
+    }
+
+    // Contar cuántos números terminan en 7
+    public float countEndingInSevenStats(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> Math.abs(n) % 10 == 7)
+                .count();
+        // Otra forma increíble que devuelve int y sin usar count:
+        //.mapToInt(n -> Math.abs(n) % 10 == 7 ? 1 : 0)
+        //.sum();
+    }
 
 
 
@@ -353,6 +391,6 @@ public class StreamIntermediate {
                 Arrays.asList(-10, -20)
         );
 
-        System.out.println(si.averagePositive(list));
+        System.out.println(si.countEndingInSevenStats(list));
     }
 }
