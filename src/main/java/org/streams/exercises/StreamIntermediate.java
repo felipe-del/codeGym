@@ -301,6 +301,33 @@ public class StreamIntermediate {
                 .count();
     }
 
+    /*
+     _______ _________ _______ __________________ _______ __________________ _______  _______
+    (  ____ \\__   __/(  ___  )\__   __/\__   __/(  ____ \\__   __/\__   __/(  ____ \(  ____ \
+    | (    \/   ) (   | (   ) |   ) (      ) (   | (    \/   ) (      ) (   | (    \/| (    \/
+    | (_____    | |   | (___) |   | |      | |   | (_____    | |      | |   | |      | (_____
+    (_____  )   | |   |  ___  |   | |      | |   (_____  )   | |      | |   | |      (_____  )
+          ) |   | |   | (   ) |   | |      | |         ) |   | |      | |   | |            ) |
+    /\____) |   | |   | )   ( |   | |   ___) (___/\____) |   | |   ___) (___| (____/\/\____) |
+    \_______)   )_(   |/     \|   )_(   \_______/\_______)   )_(   \_______/(_______/\_______)
+
+     IntSummaryStatistics es una clase de java que recopila estadísticas básicas
+     (count, sum, min, max y average) de una conjunto de valores int en una sola
+     operación.
+
+     Se usa normalmente con IntStream.summaryStatisctics() o Collectors.summarizingInt()
+     para obtener todas esas métricas de forma eficiente sin recorrer la
+     colección varias veces.
+
+     */
+
+    // Obtener estadísticas completa (count, sum, min, max, average)
+    public IntSummaryStatistics statisticsAll(List<Integer> numbers) {
+        return numbers.stream()
+                .mapToInt(Integer::intValue) // Crea un IntStream
+                .summaryStatistics();
+    }
+
 
 
 
@@ -318,6 +345,6 @@ public class StreamIntermediate {
                 Arrays.asList(-10, -20)
         );
 
-        System.out.println(si.countOddFlattened(listOfLists));
+        System.out.println(si.statisticsAll(list));
     }
 }
