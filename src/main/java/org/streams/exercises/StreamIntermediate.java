@@ -328,6 +328,14 @@ public class StreamIntermediate {
                 .summaryStatistics();
     }
 
+    // Obtener promedio de números positivos
+    public OptionalDouble averagePositive(List<Integer> numbers) {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .filter(n -> n > 0)
+                .average();
+    }
+
 
 
 
@@ -345,6 +353,6 @@ public class StreamIntermediate {
                 Arrays.asList(-10, -20)
         );
 
-        System.out.println(si.statisticsAll(list));
+        System.out.println(si.averagePositive(list));
     }
 }
