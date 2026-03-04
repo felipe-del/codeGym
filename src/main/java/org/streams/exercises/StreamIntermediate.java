@@ -366,7 +366,7 @@ public class StreamIntermediate {
     }
 
     // Contar cuántos números terminan en 7
-    public float countEndingInSevenStats(List<Integer> numbers) {
+    public long countEndingInSevenStats(List<Integer> numbers) {
         return numbers.stream()
                 .filter(n -> Math.abs(n) % 10 == 7)
                 .count();
@@ -375,7 +375,35 @@ public class StreamIntermediate {
         //.sum();
     }
 
+    // Obtener suma acumulada de cuadrados
+    public int sumSquaresAllStats(List<Integer> numbers) {
+        return numbers.stream()
+                .map(n -> n * n)
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
 
+    // Obtener rango de números (max - min)
+    public int rangeNumbers(List<Integer> numbers) {
+        IntSummaryStatistics iss = numbers.stream()
+                .mapToInt(Integer::intValue)
+                .summaryStatistics();
+        return iss.getMax() - iss.getMin();
+    }
+
+    // Obtener números por residuo módulo 5
+    public Map<Integer, Long> countByModulo5Stats(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.groupingBy(
+                        n -> n % 5, Collectors.counting()
+                ));
+    }
+
+    // Agrupar números por residuo módulo 10
+    public Map<Integer, List<Integer>> groupByModulo10Stats(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.groupingBy(n -> n % 10));
+    }
 
     public static void main(String[] args) {
         System.out.println("Ahora le subimos el nivel a los streams :)");
@@ -391,6 +419,6 @@ public class StreamIntermediate {
                 Arrays.asList(-10, -20)
         );
 
-        System.out.println(si.countEndingInSevenStats(list));
+        System.out.println(si.countByModulo5Stats(list));
     }
 }
