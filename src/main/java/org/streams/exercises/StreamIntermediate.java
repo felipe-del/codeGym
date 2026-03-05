@@ -399,10 +399,25 @@ public class StreamIntermediate {
                 ));
     }
 
-    // Agrupar números por residuo módulo 10
-    public Map<Integer, List<Integer>> groupByModulo10Stats(List<Integer> numbers) {
-        return numbers.stream()
+        // Agrupar números por residuo módulo 10
+        public Map<Integer, List<Integer>> groupByModulo10Stats(List<Integer> numbers) {
+            return numbers.stream()
                 .collect(Collectors.groupingBy(n -> n % 10));
+    }
+
+    // ========================
+    // Ejercicios más complejos
+    // ========================
+
+    // Sumar números positivos y negativos por separado
+    public Map<String, Integer> sumPositiveNegative(List<Integer> numbers) {
+        return numbers.stream()
+                .collect(Collectors.groupingBy(
+                        n -> n < 0 ? "Suma Negativa" : "Suma Positiva",
+                        Collectors.summingInt(n -> n) // Usa auto-unboxing
+                        // (Integer::intValue) Más explícito
+                        // (n -> n.intValue() Más verboso
+                ));
     }
 
     public static void main(String[] args) {
@@ -419,6 +434,6 @@ public class StreamIntermediate {
                 Arrays.asList(-10, -20)
         );
 
-        System.out.println(si.countByModulo5Stats(list));
+        System.out.println(si.sumPositiveNegative(list));
     }
 }
