@@ -427,6 +427,25 @@ public class StreamIntermediate {
                 .reduce((a, b) -> a * b);
     }
 
+    // Obtener suma acumulada de cuadrados de impares
+    public Optional<Integer> sumSquaresOdd(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n % 2 != 0)
+                .map(n -> n * n)
+                .reduce((a, b) -> a + b);
+    }
+
+    // Obtener número con segundo valor absoluto mayor
+    public Optional<Integer> secondLargestByAbsStream(List<Integer> numbers) throws Exception {
+        if (numbers.isEmpty()) throw new Exception();
+        return numbers.stream()
+                .map(n -> Math.abs(n))
+                .sorted(Comparator.reverseOrder())
+                .skip(1)
+                .findFirst();
+
+    }
+
     public static void main(String[] args) {
         System.out.println("Ahora le subimos el nivel a los streams :)");
         StreamIntermediate si = new StreamIntermediate();
@@ -440,7 +459,14 @@ public class StreamIntermediate {
                 Arrays.asList(4, 5, 6, 1),
                 Arrays.asList(-10, -20)
         );
+        Optional<Integer> result = Optional.empty();
+        try {
+             result = si.secondLargestByAbsStream(list);
 
-        System.out.println(si.productEvenGraterThan10(list));
+        } catch (Exception e) {
+            System.out.println("HOLA");
+        }
+        System.out.println(result.get());
+
     }
 }
