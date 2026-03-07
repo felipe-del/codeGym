@@ -420,6 +420,13 @@ public class StreamIntermediate {
                 ));
     }
 
+    // Producto de números pares mayores que 10
+    public Optional<Integer> productEvenGraterThan10(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n % 2 == 0 && n > 10)
+                .reduce((a, b) -> a * b);
+    }
+
     public static void main(String[] args) {
         System.out.println("Ahora le subimos el nivel a los streams :)");
         StreamIntermediate si = new StreamIntermediate();
@@ -434,6 +441,6 @@ public class StreamIntermediate {
                 Arrays.asList(-10, -20)
         );
 
-        System.out.println(si.sumPositiveNegative(list));
+        System.out.println(si.productEvenGraterThan10(list));
     }
 }
