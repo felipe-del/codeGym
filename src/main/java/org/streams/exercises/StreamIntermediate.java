@@ -446,6 +446,14 @@ public class StreamIntermediate {
 
     }
 
+    // Encontrar primer número par mayor que 50
+    public Optional<Integer> firstEvenGreater50(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n % 2 == 0 && n > 50)
+                .findFirst();
+    }
+
+
     public static void main(String[] args) {
         System.out.println("Ahora le subimos el nivel a los streams :)");
         StreamIntermediate si = new StreamIntermediate();
@@ -459,14 +467,7 @@ public class StreamIntermediate {
                 Arrays.asList(4, 5, 6, 1),
                 Arrays.asList(-10, -20)
         );
-        Optional<Integer> result = Optional.empty();
-        try {
-             result = si.secondLargestByAbsStream(list);
-
-        } catch (Exception e) {
-            System.out.println("HOLA");
-        }
-        System.out.println(result.get());
+        System.out.println(si.firstEvenGreater50(list));
 
     }
 }
