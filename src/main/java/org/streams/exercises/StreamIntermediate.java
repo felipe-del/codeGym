@@ -453,6 +453,15 @@ public class StreamIntermediate {
                 .findFirst();
     }
 
+    // Verificar si todos los números negativos tienen valor absoluto
+    // menor a 100
+    public boolean allNegativesAbsLess100(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(n -> n < 0)
+                .map(Math::abs)
+                .allMatch(n -> n < 100);
+    }
+
 
     public static void main(String[] args) {
         System.out.println("Ahora le subimos el nivel a los streams :)");
@@ -467,7 +476,7 @@ public class StreamIntermediate {
                 Arrays.asList(4, 5, 6, 1),
                 Arrays.asList(-10, -20)
         );
-        System.out.println(si.firstEvenGreater50(list));
+        System.out.println(si.allNegativesAbsLess100(list));
 
     }
 }
