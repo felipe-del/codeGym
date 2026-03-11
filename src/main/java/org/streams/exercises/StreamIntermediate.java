@@ -462,6 +462,14 @@ public class StreamIntermediate {
                 .allMatch(n -> n < 100);
     }
 
+    // Contar cuántos números únicos > 10
+    public long countDistinctGreater10(List<Integer> numbers) {
+        return numbers.stream()
+                .distinct()
+                .filter(n -> n > 10)
+                .count();
+    }
+
 
     public static void main(String[] args) {
         System.out.println("Ahora le subimos el nivel a los streams :)");
@@ -476,7 +484,7 @@ public class StreamIntermediate {
                 Arrays.asList(4, 5, 6, 1),
                 Arrays.asList(-10, -20)
         );
-        System.out.println(si.allNegativesAbsLess100(list));
+        System.out.println(si.countDistinctGreater10(list));
 
     }
 }
