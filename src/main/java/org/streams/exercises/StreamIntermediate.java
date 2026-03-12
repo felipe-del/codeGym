@@ -470,6 +470,16 @@ public class StreamIntermediate {
                 .count();
     }
 
+    // Encontrar producto de números mayores que promedio
+    public long productGreaterThanAverage(List<Integer> numbers) {
+        OptionalDouble average = numbers.stream()
+                .mapToInt(Integer::intValue)
+                .average();
+        return numbers.stream()
+                .filter(n -> n > average.getAsDouble())
+                .reduce(1, (a, b) -> a * b);
+    }
+
 
     public static void main(String[] args) {
         System.out.println("Ahora le subimos el nivel a los streams :)");
@@ -484,7 +494,7 @@ public class StreamIntermediate {
                 Arrays.asList(4, 5, 6, 1),
                 Arrays.asList(-10, -20)
         );
-        System.out.println(si.countDistinctGreater10(list));
+        System.out.println(si.productGreaterThanAverage(list));
 
     }
 }
