@@ -480,6 +480,20 @@ public class StreamIntermediate {
                 .reduce(1, (a, b) -> a * b);
     }
 
+    // Obtener lista de números multiplicados por índice
+    public List<Integer> multiplyByIndex(List<Integer> numbers) {
+        return IntStream.range(0, numbers.size())
+                .mapToObj(i -> numbers.get(i) * i)
+                .toList(); // Genera una lista nueva con el efecto aplicado
+    }
+
+    // Obtener lista de números en espejo (negativos -> positivos, positivos -> negativos)
+    public List<Integer> negateAllNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(n -> n * -1)
+                .toList();
+    }
+
 
     public static void main(String[] args) {
         System.out.println("Ahora le subimos el nivel a los streams :)");
@@ -494,7 +508,7 @@ public class StreamIntermediate {
                 Arrays.asList(4, 5, 6, 1),
                 Arrays.asList(-10, -20)
         );
-        System.out.println(si.productGreaterThanAverage(list));
+        System.out.println(si.negateAllNumbers(list));
 
     }
 }
