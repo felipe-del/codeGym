@@ -160,7 +160,7 @@ public class StreamIntermediate {
         return numbers.stream()
                 .collect(Collectors.groupingBy(n ->
                         n % 2 == 0 ? "Pares" : "Impares", Collectors.counting()
-                        ));
+                ));
     }
 
     // Particionar números positivos y no positivos
@@ -399,9 +399,9 @@ public class StreamIntermediate {
                 ));
     }
 
-        // Agrupar números por residuo módulo 10
-        public Map<Integer, List<Integer>> groupByModulo10Stats(List<Integer> numbers) {
-            return numbers.stream()
+    // Agrupar números por residuo módulo 10
+    public Map<Integer, List<Integer>> groupByModulo10Stats(List<Integer> numbers) {
+        return numbers.stream()
                 .collect(Collectors.groupingBy(n -> n % 10));
     }
 
@@ -494,11 +494,32 @@ public class StreamIntermediate {
                 .toList();
     }
 
+    // =====================
+    // Ejercicios de Strings
+    // =====================
+
+    // Convertir lista de strings a un Set -> toSetStrings
+    public Set<String> toSetStrings(List<String> words) {
+        return words.stream()
+                .collect(Collectors.toSet());
+    }
+
+    // Concatenar todos los strings separados por comas → joinStringsComma
+    // Concatenar todos los strings en mayúsculas → joinUppercaseStrings
+    // Contar cuántos strings tienen longitud > 5 → countStringsLengthGreater5
+    // Encontrar el string más largo → longestString
+    // Encontrar el string más corto → shortestString
+    // Crear lista filtrando strings que contengan “a” → stringsContainingA
+    // Convertir todos los strings a minúsculas → toLowercaseStrings
+    // Convertir todos los strings a mayúsculas → toUppercaseStrings
+    // Crear un Map de string → longitud → mapStringToLength
+
 
     public static void main(String[] args) {
         System.out.println("Ahora le subimos el nivel a los streams :)");
         StreamIntermediate si = new StreamIntermediate();
-        // Listas de prueba
+
+        // Listas de prueba de Integer
         List<Integer> list = Arrays.asList(-150, -110, -50, -10, -7, -3, -1,
                 0, 1, 2, 2, 3, 4, 5, 7, 10, 14, 20, 21, 30, 42, 49,
                 50, 75, 99, 100, 101, 151, 2, 3, 7, 14, 20, 17, 32, 87);
@@ -508,7 +529,29 @@ public class StreamIntermediate {
                 Arrays.asList(4, 5, 6, 1),
                 Arrays.asList(-10, -20)
         );
-        System.out.println(si.negateAllNumbers(list));
+
+        // System.out.println(si.negateAllNumbers(list));
+
+        // Listas de prueba de Strings
+        List<String> words = List.of(
+                "apple", "apple","banana","orange","kiwi","pear",
+                "grape","melon","avocado","fig","mango",
+                "testing","running","coding","level","radar"
+        );
+
+        List<String> sentences = List.of(
+                "java streams are powerful",
+                "functional programming is cool",
+                "learning streams is interesting"
+        );
+
+        List<List<String>> nested = List.of(
+                List.of("apple","banana","cherry"),
+                List.of("dog","elephant","fox"),
+                List.of("grape","melon","kiwi")
+        );
+
+        System.out.println(si.toSetStrings(words));
 
     }
 }
