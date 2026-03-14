@@ -504,7 +504,12 @@ public class StreamIntermediate {
                 .collect(Collectors.toSet());
     }
 
-    // Concatenar todos los strings separados por comas → joinStringsComma
+    // Concatenar todos los strings separados por comas
+    public String joinStringsComma(List<String> words) {
+        return words.stream()
+                .collect(Collectors.joining(","));
+    }
+
     // Concatenar todos los strings en mayúsculas → joinUppercaseStrings
     // Contar cuántos strings tienen longitud > 5 → countStringsLengthGreater5
     // Encontrar el string más largo → longestString
@@ -551,7 +556,7 @@ public class StreamIntermediate {
                 List.of("grape","melon","kiwi")
         );
 
-        System.out.println(si.toSetStrings(words));
+        System.out.println(si.joinStringsComma(words));
 
     }
 }
