@@ -566,6 +566,68 @@ public class StreamIntermediate {
                 .collect(Collectors.groupingBy(String::length));
     }
 
+    // ===================================
+    // GROUPING & PARTITIONING CON STRINGS
+    // ===================================
+
+    // Agrupar strings por su primera letra → groupByFirstChar
+    // Agrupar strings por longitud → groupByLength
+    // Contar strings por longitud → countByLength
+    // Particionar strings que contienen “e” y los que no → partitionContainsE
+    // Particionar strings con longitud par e impar → partitionEvenOddLength
+    // Agrupar strings por su último carácter → groupByLastChar
+    // Obtener string más largo por primer carácter → longestByFirstChar
+    // Obtener string más corto por longitud → shortestByLength
+    // Contar cuántos strings empiezan con vocal → countStartingVowel
+    // Contar cuántos strings terminan en consonante → countEndingConsonant
+    // Particionar strings que comienzan con vocal ??
+
+    // =======================================
+    // FLATMAP / NESTED STRUCTURES CON STRINGS
+    // =======================================
+
+    // Aplanar lista de listas de strings → flattenListOfStrings
+    // Obtener todas las palabras de lista de frases → flattenWordsFromSentences
+    // Obtener todas las palabras únicas → flattenDistinctWords
+    // Convertir lista de listas a lista de longitudes → flattenLengths
+    // Obtener todas las palabras en mayúsculas → flattenUppercaseWords
+    // Filtrar palabras que contengan “ing” en lista de listas → flattenWordsContainingIng
+    // Contar cuántas palabras tienen longitud > 3 → countWordsLengthGreater3
+    // Obtener palabra más larga de cada sublista → longestWordPerSublist
+    // Ordenar palabras de todas las sublistas → sortFlattenedWords
+    // Concatenar palabras de todas las sublistas en un solo string → joinFlattenedWords
+
+    // ==================================
+    // ESTADÍSTICAS Y RESUMEN CON STRINGS
+    // ==================================
+
+    // Obtener estadística de longitudes (min, max, promedio) → stringLengthStatistics
+    // Obtener palabra más repetida → mostFrequentString
+    // Contar cuántas palabras empiezan con mayúscula → countStartingUppercase
+    // Contar cuántas palabras son palíndromos → countPalindromes
+    // Obtener lista de palabras únicas de longitud par → distinctEvenLengthWords
+    // Obtener lista de palabras únicas de longitud impar → distinctOddLengthWords
+    // Concatenar palabras separadas por guion → joinWordsWithDash
+    // Contar palabras por primera letra → countByFirstChar
+    // Contar palabras por última letra → countByLastChar
+    // Verificar si todas las palabras tienen longitud > 2 → allWordsLengthGreater2
+
+    // ==============================
+    // REDUCE / COMBINADO CON STRINGS
+    // ==============================
+
+    // Concatenar todas las palabras en mayúsculas con espacio → reduceToUppercaseSentence
+    // Obtener la palabra más larga usando reduce → reduceLongestWord
+    // Obtener la palabra más corta usando reduce → reduceShortestWord
+    // Contar total de caracteres de todas las palabras usando map + reduce → reduceTotalChars
+    // Concatenar palabras que contengan “a” → reduceWordsContainingA
+    // Obtener la palabra más repetida usando reduce → reduceMostFrequentWord
+    // Concatenar palabras de longitud par separadas por coma → reduceEvenLengthWords
+    // Obtener primer string que contenga “ing” → findFirstWordWithIng
+    // Verificar si existe palabra de longitud mayor a 10 → anyWordLongerThan10
+    // Concatenar todas las palabras en minúsculas y ordenadas → reduceSortedLowercaseWords
+
+
 
     public static void main(String[] args) {
         System.out.println("Ahora le subimos el nivel a los streams :)");
