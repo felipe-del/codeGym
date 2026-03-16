@@ -517,13 +517,54 @@ public class StreamIntermediate {
                 .collect(Collectors.joining(", "));
     }
 
-    // Contar cuántos strings tienen longitud > 5 → countStringsLengthGreater5
-    // Encontrar el string más largo → longestString
-    // Encontrar el string más corto → shortestString
-    // Crear lista filtrando strings que contengan “a” → stringsContainingA
-    // Convertir todos los strings a minúsculas → toLowercaseStrings
+    // Contar cuántos strings tienen longitud > 5
+    public long countStringsLengthGreater5(List<String> words) {
+        return words.stream()
+                .filter(s -> s.length() > 5)
+                .count();
+    }
+
+    // Encontrar el string más largo
+    public Optional<String> longestString(List<String> words) {
+        return words.stream()
+                .max(Comparator.comparingInt(String::length));
+    }
+
+    // Encontrar el string más corto
+    public Optional<String> shortestString(List<String> words) {
+        return words.stream()
+                .min(Comparator.comparingInt(String::length));
+    }
+
+
+    // Crear lista filtrando strings que contengan “a”
+    public List<String> stringsContainingA(List<String> words) {
+        return words.stream()
+                .filter(word -> word.contains("a"))
+                .toList();
+    }
+
+
+    // Convertir todos los strings a minúsculas
+    public List<String> toLowercaseStrings(List<String> words) {
+        return words.stream()
+                .map(String::toLowerCase)
+                .toList();
+    }
+
+
     // Convertir todos los strings a mayúsculas → toUppercaseStrings
-    // Crear un Map de string → longitud → mapStringToLength
+    public List<String> toUppercaseStrings(List<String> words) {
+        return words.stream()
+                .map(String::toUpperCase)
+                .toList();
+    }
+
+    // Crear un Map de string → longitud
+    public Map<Integer, List<String>> mapStringToLength(List<String> words) {
+        return words.stream()
+                .collect(Collectors.groupingBy(String::length));
+    }
 
 
     public static void main(String[] args) {
@@ -562,7 +603,7 @@ public class StreamIntermediate {
                 List.of("grape","melon","kiwi")
         );
 
-        System.out.println(si.joinUppercaseStrings(words));
+        System.out.println(si.mapStringToLength(words));
 
     }
 }
