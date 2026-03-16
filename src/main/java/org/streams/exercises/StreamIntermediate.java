@@ -510,7 +510,13 @@ public class StreamIntermediate {
                 .collect(Collectors.joining(","));
     }
 
-    // Concatenar todos los strings en mayúsculas → joinUppercaseStrings
+    // Concatenar todos los strings en mayúsculas
+    public String joinUppercaseStrings(List<String> words) {
+        return words.stream()
+                .map(String::toUpperCase)
+                .collect(Collectors.joining(", "));
+    }
+
     // Contar cuántos strings tienen longitud > 5 → countStringsLengthGreater5
     // Encontrar el string más largo → longestString
     // Encontrar el string más corto → shortestString
@@ -556,7 +562,7 @@ public class StreamIntermediate {
                 List.of("grape","melon","kiwi")
         );
 
-        System.out.println(si.joinStringsComma(words));
+        System.out.println(si.joinUppercaseStrings(words));
 
     }
 }
