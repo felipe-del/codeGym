@@ -571,6 +571,11 @@ public class StreamIntermediate {
     // ===================================
 
     // Agrupar strings por su primera letra → groupByFirstChar
+    public Map<Character, List<String>> groupByFirstChar(List<String> words) {
+        return words.stream()
+                .collect(Collectors.groupingBy(w -> w.charAt(0)));
+    }
+
     // Agrupar strings por longitud → groupByLength
     // Contar strings por longitud → countByLength
     // Particionar strings que contienen “e” y los que no → partitionContainsE
@@ -665,7 +670,7 @@ public class StreamIntermediate {
                 List.of("grape","melon","kiwi")
         );
 
-        System.out.println(si.mapStringToLength(words));
+        System.out.println(si.groupByFirstChar(words));
 
     }
 }
