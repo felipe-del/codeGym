@@ -576,7 +576,12 @@ public class StreamIntermediate {
                 .collect(Collectors.groupingBy(w -> w.charAt(0)));
     }
 
-    // Agrupar strings por longitud → groupByLength
+    // Agrupar strings por longitud
+    public Map<Integer, List<String>> groupByLength(List<String> words) {
+        return words.stream()
+                .collect(Collectors.groupingBy(String::length));
+    }
+
     // Contar strings por longitud → countByLength
     // Particionar strings que contienen “e” y los que no → partitionContainsE
     // Particionar strings con longitud par e impar → partitionEvenOddLength
@@ -670,7 +675,7 @@ public class StreamIntermediate {
                 List.of("grape","melon","kiwi")
         );
 
-        System.out.println(si.groupByFirstChar(words));
+        System.out.println(si.groupByLength(words));
 
     }
 }
