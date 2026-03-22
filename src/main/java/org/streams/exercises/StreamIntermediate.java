@@ -583,12 +583,17 @@ public class StreamIntermediate {
     }
 
     // Contar strings por longitud → countByLength
-    public Map<Integer, Long> coutnByLength(List<String> words) {
+    public Map<Integer, Long> countByLength(List<String> words) {
         return words.stream()
                 .collect(Collectors.groupingBy(String::length, Collectors.counting()));
     }
 
-    // Particionar strings que contienen “e” y los que no → partitionContainsE
+    // Particionar strings que contienen “e” y los que no
+    public Map<Boolean, List<String>> partitionContainsE(List<String> words) {
+        return words.stream()
+                .collect(Collectors.partitioningBy(w -> w.contains("e")));
+    }
+
     // Particionar strings con longitud par e impar → partitionEvenOddLength
     // Agrupar strings por su último carácter → groupByLastChar
     // Obtener string más largo por primer carácter → longestByFirstChar
@@ -680,7 +685,7 @@ public class StreamIntermediate {
                 List.of("grape","melon","kiwi")
         );
 
-        System.out.println(si.coutnByLength(words));
+        System.out.println(si.partitionContainsE(words));
 
     }
 }
