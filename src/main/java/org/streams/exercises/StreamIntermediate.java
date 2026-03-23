@@ -594,7 +594,12 @@ public class StreamIntermediate {
                 .collect(Collectors.partitioningBy(w -> w.contains("e")));
     }
 
-    // Particionar strings con longitud par e impar → partitionEvenOddLength
+    // Particionar strings con longitud par e impar
+    public Map<Boolean, List<String>> partitionEvenOddLenght(List<String> words) {
+        return words.stream()
+                .collect(Collectors.partitioningBy(w -> w.length() % 2 == 0));
+    }
+
     // Agrupar strings por su último carácter → groupByLastChar
     // Obtener string más largo por primer carácter → longestByFirstChar
     // Obtener string más corto por longitud → shortestByLength
@@ -685,7 +690,7 @@ public class StreamIntermediate {
                 List.of("grape","melon","kiwi")
         );
 
-        System.out.println(si.partitionContainsE(words));
+        System.out.println(si.partitionEvenOddLenght(words));
 
     }
 }
