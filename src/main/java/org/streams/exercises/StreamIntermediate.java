@@ -595,13 +595,31 @@ public class StreamIntermediate {
     }
 
     // Particionar strings con longitud par e impar
-    public Map<Boolean, List<String>> partitionEvenOddLenght(List<String> words) {
+    public Map<Boolean, List<String>> partitionEvenOddLength(List<String> words) {
         return words.stream()
                 .collect(Collectors.partitioningBy(w -> w.length() % 2 == 0));
     }
 
     // Agrupar strings por su último carácter → groupByLastChar
+    public Map<Character, List<String>> groupByLastChar(List<String> words) {
+        return words.stream()
+                .collect(Collectors.groupingBy(w -> w.charAt(w.length() - 1)));
+    }
+
     // Obtener string más largo por primer carácter → longestByFirstChar
+    public Map<Character, String> longestBYFirstChar(List<String> words) {
+        return words.stream()
+                .collect(Collectors.groupingBy(
+                                w -> w.charAt(0),
+                                Collectors.collectingAndThen( // El segundo parámetro recibe una lambda de finalización
+                                        Collectors.maxBy(Comparator.comparingInt(String::length)),
+                                        Optional::get
+                                )
+                                //Collectors.maxBy(Comparator.comparingInt(String::length))
+                        )
+                );
+    }
+
     // Obtener string más corto por longitud → shortestByLength
     // Contar cuántos strings empiezan con vocal → countStartingVowel
     // Contar cuántos strings terminan en consonante → countEndingConsonant
@@ -653,7 +671,6 @@ public class StreamIntermediate {
     // Concatenar todas las palabras en minúsculas y ordenadas → reduceSortedLowercaseWords
 
 
-
     public static void main(String[] args) {
         System.out.println("Ahora le subimos el nivel a los streams :)");
         StreamIntermediate si = new StreamIntermediate();
@@ -673,9 +690,9 @@ public class StreamIntermediate {
 
         // Listas de prueba de Strings
         List<String> words = List.of(
-                "apple", "apple","banana","orange","kiwi","pear",
-                "grape","melon","avocado","fig","mango",
-                "testing","running","coding","level","radar"
+                "apple", "apple", "banana", "orange", "kiwi", "pear",
+                "grape", "melon", "avocado", "fig", "mango",
+                "testing", "running", "coding", "level", "radar"
         );
 
         List<String> sentences = List.of(
@@ -685,12 +702,12 @@ public class StreamIntermediate {
         );
 
         List<List<String>> nested = List.of(
-                List.of("apple","banana","cherry"),
-                List.of("dog","elephant","fox"),
-                List.of("grape","melon","kiwi")
+                List.of("apple", "banana", "cherry"),
+                List.of("dog", "elephant", "fox"),
+                List.of("grape", "melon", "kiwi")
         );
 
-        System.out.println(si.partitionEvenOddLenght(words));
+        System.out.println(si.longestBYFirstChar(words));
 
     }
 }
