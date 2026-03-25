@@ -621,6 +621,11 @@ public class StreamIntermediate {
     }
 
     // Obtener string más corto por longitud → shortestByLength
+    public Optional<String> shortestByLength(List<String> words) {
+        return words.stream()
+                .min(Comparator.comparingInt(String::length));
+    }
+
     // Contar cuántos strings empiezan con vocal → countStartingVowel
     // Contar cuántos strings terminan en consonante → countEndingConsonant
     // Particionar strings que comienzan con vocal ??
@@ -707,7 +712,7 @@ public class StreamIntermediate {
                 List.of("grape", "melon", "kiwi")
         );
 
-        System.out.println(si.longestBYFirstChar(words));
+        System.out.println(si.shortestByLength(words));
 
     }
 }
