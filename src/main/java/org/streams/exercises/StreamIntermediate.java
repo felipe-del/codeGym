@@ -620,14 +620,29 @@ public class StreamIntermediate {
                 );
     }
 
-    // Obtener string más corto por longitud → shortestByLength
+    // Obtener string más corto por longitud
     public Optional<String> shortestByLength(List<String> words) {
         return words.stream()
                 .min(Comparator.comparingInt(String::length));
     }
 
     // Contar cuántos strings empiezan con vocal → countStartingVowel
+    public Long countStartingVowel(List<String> words) {
+        return words.stream() // w = "hola" => w.substring(0, 1) = "h"
+                .filter(w -> "eaiou".contains(w.substring(0, 1)))
+                .count();
+    }
+
     // Contar cuántos strings terminan en consonante → countEndingConsonant
+    public Long countEndingConsonant(List<String> words) {
+        return words.stream()
+                .filter(w -> {
+                    var length = w.length();
+                    return !"aeiou".contains(w.substring(length - 1));
+                })
+                .count();
+    }
+
     // Particionar strings que comienzan con vocal ??
 
     // =======================================
@@ -712,7 +727,7 @@ public class StreamIntermediate {
                 List.of("grape", "melon", "kiwi")
         );
 
-        System.out.println(si.shortestByLength(words));
+        System.out.println(si.countEndingConsonant(words));
 
     }
 }
