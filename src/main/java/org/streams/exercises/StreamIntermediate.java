@@ -646,7 +646,11 @@ public class StreamIntermediate {
     // Particionar strings que comienzan con vocal
     public Map<Boolean, List<String>> partitionStartVowel(List<String> words) {
         return words.stream()
-                .collect(Collectors.partitioningBy(w -> "aeiou".contains(w.substring(0,1))));
+                .collect(Collectors.partitioningBy(
+                                w -> "aeiou".contains(w.substring(0, 1)
+                                )
+                        )
+                );
     }
 
     // =======================================
