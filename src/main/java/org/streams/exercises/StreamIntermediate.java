@@ -643,7 +643,11 @@ public class StreamIntermediate {
                 .count();
     }
 
-    // Particionar strings que comienzan con vocal ??
+    // Particionar strings que comienzan con vocal
+    public Map<Boolean, List<String>> partitionStartVowel(List<String> words) {
+        return words.stream()
+                .collect(Collectors.partitioningBy(w -> "aeiou".contains(w.substring(0,1))));
+    }
 
     // =======================================
     // FLATMAP / NESTED STRUCTURES CON STRINGS
@@ -727,7 +731,7 @@ public class StreamIntermediate {
                 List.of("grape", "melon", "kiwi")
         );
 
-        System.out.println(si.countEndingConsonant(words));
+        System.out.println(si.partitionStartVowel(words));
 
     }
 }
