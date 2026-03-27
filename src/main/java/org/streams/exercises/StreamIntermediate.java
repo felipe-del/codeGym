@@ -658,6 +658,13 @@ public class StreamIntermediate {
     // =======================================
 
     // Aplanar lista de listas de strings → flattenListOfStrings
+    public List<String> flattenListOfStrings(List<List<String>> nested) {
+        return nested.stream()
+                //.flatMap(l -> l.stream())
+                .flatMap(Collection::stream)
+                .toList();
+    }
+
     // Obtener todas las palabras de lista de frases → flattenWordsFromSentences
     // Obtener todas las palabras únicas → flattenDistinctWords
     // Convertir lista de listas a lista de longitudes → flattenLengths
@@ -735,7 +742,7 @@ public class StreamIntermediate {
                 List.of("grape", "melon", "kiwi")
         );
 
-        System.out.println(si.partitionStartVowel(words));
+        System.out.println(si.flattenListOfStrings(nested));
 
     }
 }
