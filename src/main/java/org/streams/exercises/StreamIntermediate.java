@@ -666,6 +666,12 @@ public class StreamIntermediate {
     }
 
     // Obtener todas las palabras de lista de frases → flattenWordsFromSentences
+    public List<String> flattenWordsFromSentences(List<String> sentences) {
+        return sentences.stream()
+                .flatMap(s -> Arrays.stream(s.split(" ")))
+                .toList();
+    }
+
     // Obtener todas las palabras únicas → flattenDistinctWords
     // Convertir lista de listas a lista de longitudes → flattenLengths
     // Obtener todas las palabras en mayúsculas → flattenUppercaseWords
@@ -742,7 +748,7 @@ public class StreamIntermediate {
                 List.of("grape", "melon", "kiwi")
         );
 
-        System.out.println(si.flattenListOfStrings(nested));
+        System.out.println(si.flattenWordsFromSentences(sentences));
 
     }
 }
