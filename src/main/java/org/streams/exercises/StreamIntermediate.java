@@ -704,6 +704,13 @@ public class StreamIntermediate {
         }
 
         // Convertir lista de listas a lista de longitudes → flattenLengths
+        public List<Integer> flattenLengths(List<List<String>> nested) {
+                return nested.stream()
+                        .flatMap(Collection::stream)
+                        .map(String::length)
+                        .toList();
+        }
+
         // Obtener todas las palabras en mayúsculas → flattenUppercaseWords
         // Filtrar palabras que contengan “ing” en lista de listas →
         // flattenWordsContainingIng
@@ -776,11 +783,11 @@ public class StreamIntermediate {
                                 "learning streams is interesting");
 
                 List<List<String>> nested = List.of(
-                                List.of("apple", "banana", "cherry"),
+                                List.of("apple", "banana", "cherry", "cherry"),
                                 List.of("dog", "elephant", "fox"),
                                 List.of("grape", "melon", "kiwi"));
 
-                System.out.println(si.flattenDistinctWords(sentences));
+                System.out.println(si.flattenLengths(nested));
 
         }
 }
