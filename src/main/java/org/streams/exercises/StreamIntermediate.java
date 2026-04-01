@@ -706,12 +706,19 @@ public class StreamIntermediate {
         // Convertir lista de listas a lista de longitudes → flattenLengths
         public List<Integer> flattenLengths(List<List<String>> nested) {
                 return nested.stream()
-                        .flatMap(Collection::stream)
-                        .map(String::length)
-                        .toList();
+                                .flatMap(Collection::stream)
+                                .map(String::length)
+                                .toList();
         }
 
-        // Obtener todas las palabras en mayúsculas → flattenUppercaseWords
+        // Obtener todas las palabras en mayúsculas
+        public List<String> flattenUppercaseWords(List<List<String>> nested) {
+                return nested.stream()
+                                .flatMap(Collection::stream)
+                                .map(w -> w.toUpperCase())
+                                .toList();
+        }
+
         // Filtrar palabras que contengan “ing” en lista de listas →
         // flattenWordsContainingIng
         // Contar cuántas palabras tienen longitud > 3 → countWordsLengthGreater3
@@ -787,7 +794,7 @@ public class StreamIntermediate {
                                 List.of("dog", "elephant", "fox"),
                                 List.of("grape", "melon", "kiwi"));
 
-                System.out.println(si.flattenLengths(nested));
+                System.out.println(si.flattenUppercaseWords(nested));
 
         }
 }
