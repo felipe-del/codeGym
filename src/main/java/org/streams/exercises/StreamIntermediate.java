@@ -715,7 +715,7 @@ public class StreamIntermediate {
         public List<String> flattenUppercaseWords(List<List<String>> nested) {
                 return nested.stream()
                                 .flatMap(Collection::stream)
-                                .map(w -> w.toUpperCase())
+                                .map(String::toUpperCase)
                                 .toList();
         }
 
