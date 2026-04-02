@@ -719,9 +719,21 @@ public class StreamIntermediate {
                                 .toList();
         }
 
-        // Filtrar palabras que contengan “ing” en lista de listas →
-        // flattenWordsContainingIng
-        // Contar cuántas palabras tienen longitud > 3 → countWordsLengthGreater3
+        // Filtrar palabras que contengan “ing” en lista de listas
+        public List<String> flattenWordsContainingIng(List<List<String>> nested) {
+                return nested.stream()
+                                .flatMap(Collection::stream)
+                                .toList();
+        }
+
+        // Contar cuántas palabras tienen longitud > 3
+        public long countWordsLengthGreater3(List<List<String>> nested) {
+                return nested.stream()
+                                .flatMap(Collection::stream)
+                                .filter(w -> w.length() > 3)
+                                .count();
+        }
+
         // Obtener palabra más larga de cada sublista → longestWordPerSublist
         // Ordenar palabras de todas las sublistas → sortFlattenedWords
         // Concatenar palabras de todas las sublistas en un solo string →
@@ -794,7 +806,7 @@ public class StreamIntermediate {
                                 List.of("dog", "elephant", "fox"),
                                 List.of("grape", "melon", "kiwi"));
 
-                System.out.println(si.flattenUppercaseWords(nested));
+                System.out.println(si.countWordsLengthGreater3(nested));
 
         }
 }
