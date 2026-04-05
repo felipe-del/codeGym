@@ -1,6 +1,6 @@
 # Ejercicios Lógicos - Java
 
-Este proyecto contiene ejercicios resueltos de LeetCode en Java, organizados por **dificultad** y con **tests unitarios
+Este proyecto contiene ejercicios resueltos de LeetCode y librerias de Java, organizados por **dificultad** y con **tests unitarios
 ** para cada ejercicio.
 
 ---
