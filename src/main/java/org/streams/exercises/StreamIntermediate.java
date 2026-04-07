@@ -2,6 +2,7 @@ package org.streams.exercises;
 
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -746,7 +747,14 @@ public class StreamIntermediate {
                 ));
     }
 
-    // Ordenar palabras de todas las sublistas → sortFlattenedWords
+    // Ordenar palabras de todas las sublistas
+    public List<String> sortFlattenedWords(List<List<String>> nested) {
+        return nested.stream()
+                .flatMap(Collection::stream)
+                .sorted()
+                .toList();
+    }
+
     // Concatenar palabras de todas las sublistas en un solo string →
     // joinFlattenedWords
 
@@ -817,7 +825,7 @@ public class StreamIntermediate {
                 List.of("dog", "elephant", "fox"),
                 List.of("grape", "melon", "kiwi"));
 
-        System.out.println(si.longestWordPerSublist(nested));
+        System.out.println(si.sortFlattenedWords(nested));
 
     }
 }
