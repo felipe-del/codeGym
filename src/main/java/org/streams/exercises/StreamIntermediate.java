@@ -755,8 +755,12 @@ public class StreamIntermediate {
                 .toList();
     }
 
-    // Concatenar palabras de todas las sublistas en un solo string →
-    // joinFlattenedWords
+    // Concatenar palabras de todas las sublistas en un solo string
+    public String joinFlattenedWords(List<List<String>> nested) {
+        return nested.stream()
+                .flatMap(Collection::stream)
+                .collect(Collectors.joining(" "));
+    }
 
     // ==================================
     // ESTADÍSTICAS Y RESUMEN CON STRINGS
@@ -825,7 +829,7 @@ public class StreamIntermediate {
                 List.of("dog", "elephant", "fox"),
                 List.of("grape", "melon", "kiwi"));
 
-        System.out.println(si.sortFlattenedWords(nested));
+        System.out.println(si.joinFlattenedWords(nested));
 
     }
 }
