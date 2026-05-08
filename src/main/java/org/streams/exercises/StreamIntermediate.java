@@ -772,7 +772,16 @@ public class StreamIntermediate {
                 .collect(Collectors.summarizingInt(String::length));
     }
 
-    // Obtener palabra más repetida → mostFrequentString
+    // Obtener palabra más repetida
+    public Optional<String> mostFrequentString(List<String> words) {
+        return words.stream()
+                .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey);
+    }
+
+
     // Contar cuántas palabras empiezan con mayúscula → countStartingUppercase
     // Contar cuántas palabras son palíndromos → countPalindromes
     // Obtener lista de palabras únicas de longitud par → distinctEvenLengthWords
@@ -833,7 +842,7 @@ public class StreamIntermediate {
                 List.of("dog", "elephant", "fox"),
                 List.of("grape", "melon", "kiwi"));
 
-        System.out.println(si.stringLengthStatistics(words));
+        System.out.println(si.mostFrequentString(words));
 
     }
 }
