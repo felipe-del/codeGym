@@ -57,7 +57,7 @@ Todos los tests están en `src/test/java/org/leetcode/...` organizados por dific
 
 - Cada ejercicio tiene **solución y test separados**.
 - Puedes agregar nuevos ejercicios siguiendo la misma estructura.
-- Los tests incluyen **edge cases** y casos normales para validar todas las soluciones.
+- Los tests incluyen **edge cases** y casos normales para validar todas las soluciones posibles.
 
 ---
 
