@@ -782,7 +782,13 @@ public class StreamIntermediate {
     }
 
 
-    // Contar cuántas palabras empiezan con mayúscula → countStartingUppercase
+    // Contar cuántas palabras empiezan con mayúscula
+    public int countStartingUppercase(List<String> words) {
+        return (int) words.stream()
+                .filter(w -> Character.isUpperCase(w.charAt(0)))
+                .count();
+    }
+
     // Contar cuántas palabras son palíndromos → countPalindromes
     // Obtener lista de palabras únicas de longitud par → distinctEvenLengthWords
     // Obtener lista de palabras únicas de longitud impar → distinctOddLengthWords
@@ -842,7 +848,7 @@ public class StreamIntermediate {
                 List.of("dog", "elephant", "fox"),
                 List.of("grape", "melon", "kiwi"));
 
-        System.out.println(si.mostFrequentString(words));
+        System.out.println(si.countStartingUppercase(words));
 
     }
 }
