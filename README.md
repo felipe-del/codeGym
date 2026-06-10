@@ -33,8 +33,6 @@ leetcode-exercises/
 
 ### Hard
 
-- (Agregar ejercicios difíciles aquí)
-
 ---
 
 ## Cómo compilar y ejecutar tests
